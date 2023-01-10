@@ -33,13 +33,11 @@ static t_packet create_packet(t_stats *stats)
 	unsigned long i = 0;
 	t_packet packet;
 
-	// init to null
 	ft_bzero(&packet, sizeof(packet));
 	packet.hdr.type = ICMP_ECHO;
 	packet.hdr.un.echo.id = getpid();
 
-	while (i < sizeof(packet.msg)-1)
-	{
+	while (i < sizeof(packet.msg)-1){
 		packet.msg[i] = i + '0';
 		i++;
 	}
@@ -83,7 +81,7 @@ int	SendPing(t_args *args, struct sockaddr_in *addr_config)
 			{
 				if(packet.hdr.type == RESERVED && packet.hdr.code == ECHO_REPLY)
 					PrintReceiveSuccess(args, &stats);
-				else if (packet.hdr.type == RESERVED && packet.hdr.code == TTL_EXCCEDED)
+				else if (packet.hdr.type == RESERVED && packet.hdr.code == TTL_EXCCEDED && args->flags[V] == true)
 					PrintReceiveFail(args, &stats);
 			}
 		}

@@ -34,13 +34,11 @@ void PrintReceiveSuccess(t_args *args, t_stats *stats)
 
 void PrintReceiveFail(t_args *args, t_stats *stats)
 {
-	if(args->flags[V] == true){
-		if (args->diff)
-				printf("%d bytes from %s (%s): icmp_seq=%d Time to live exceeded\n",
-				PKT_SIZE, args->ip, args->ip, stats->seq);
-		else
-			printf("%d bytes from %s: icmp_seq=%d Time to live exceeded\n",
-				PKT_SIZE, args->ip, stats->seq);
-	}
+	if (args->diff)
+			printf("%d bytes from %s (%s): icmp_seq=%d Time to live exceeded\n",
+			PKT_SIZE, args->ip, args->ip, stats->seq);
+	else
+		printf("%d bytes from %s: icmp_seq=%d Time to live exceeded\n",
+			PKT_SIZE, args->ip, stats->seq);
 	stats->pkt_error++;
 }
