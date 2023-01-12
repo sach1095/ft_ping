@@ -29,7 +29,7 @@ void	init_args(t_args *args)
 	args->ip_brut = NULL;
 	args->hostname = NULL;
 	args->sock = 0;
-	args->ttl = 63;
+	args->ttl = 1;
 	args->tv_out.tv_sec = 1;
 	args->tv_out.tv_usec = 0;
 	args->diff = false;

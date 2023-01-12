@@ -15,6 +15,8 @@ static bool ParsArgs(char **av, int ac, t_args *args)
 	int i = 1;
 
 	init_args(args);
+	if (args->ttl == 0)
+		return (PrintError("Ft_ping: cannot set unicast time-to-live: Invalid argument\n"));
 	if (ac == 3){
 		if (av[1][0] == '-' && (length(av[1]) >= 2 && length(av[1]) <= 3)){
 			for (size_t i = 1; av[1][i] != '\0'; i++)
@@ -30,7 +32,7 @@ static bool ParsArgs(char **av, int ac, t_args *args)
 			}
 		}
 		else
-			return (PrintError("Flags format invalide, you can use -[t, v] only.\n"));
+			return (PrintError("Ft_ping: Flags format invalide: you can use -[t, v] only.\n"));
 		i++;
 	}
 	args->ip = av[i];
