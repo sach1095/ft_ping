@@ -115,6 +115,7 @@ int				send_ping(t_args *args, struct sockaddr_in *addr_config);
 */
 int				process_host(t_args *args, struct sockaddr_in *addr_config);
 unsigned short	calc_checksum(void *packet, int len);
+void			chek_rev_dns(char *ip_addr, t_args *args);
 
 /*
 ** printMethod.c

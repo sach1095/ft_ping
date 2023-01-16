@@ -46,7 +46,7 @@ static void	save_stats(t_stats *stats)
 static t_packet	create_packet(t_stats *stats)
 {
 	unsigned long	i;
-	int				len_msg;
+	unsigned long	len_msg;
 	t_packet		packet;
 
 	i = 0;
@@ -94,9 +94,10 @@ int	send_ping(t_args *args, struct sockaddr_in *addr_config)
 	bool				sucess;
 	t_packet			packet;
 
+	printf("PING %s (%s) 56(84) bytes of data.\n", args->ip_brut, args->ip);
 	init_stats_and_time(&g_stats, args);
 	signal(SIGINT, catch_signal);
-	printf("PING %s (%s) 56(84) bytes of data.\n", args->ip_brut, args->ip);
+	chek_rev_dns(args->ip, args);
 	if (setsockopt(args->sock, SOL_IP, IP_TTL, &args->ttl, sizeof(args->ttl)))
 		return (print_error("Set option socket fail"));
 	setsockopt(args->sock, SOL_SOCKET, SO_RCVTIMEO, (const char *)&args->tv_out,

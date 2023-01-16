@@ -22,7 +22,7 @@ static void	print_help(void)
 	exit(0);
 }
 
-static int	procces_ac_three(char **av, int ac, t_args *args, int *old_i)
+static int	procces_ac_three(char **av, t_args *args, int *old_i)
 {
 	int	i;
 	int	y;
@@ -30,7 +30,7 @@ static int	procces_ac_three(char **av, int ac, t_args *args, int *old_i)
 	i = 1;
 	if (av[1][0] == '-' && (length(av[1]) >= 2 && length(av[1]) <= 3))
 	{
-		y = -1;
+		y = 0;
 		while (av[1][++y] != '\0')
 		{
 			if (av[1][y] == 'h' || av[1][y] == 'v')
@@ -58,7 +58,7 @@ static bool	pars_args(char **av, int ac, t_args *args)
 	i = 1;
 	init_args(args);
 	if (ac == 3)
-		if (procces_ac_three(av, ac, args, &i))
+		if (procces_ac_three(av, args, &i))
 			return (EXIT_FAILURE);
 	args->ip = av[i];
 	return (EXIT_SUCCESS);

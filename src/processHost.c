@@ -12,7 +12,7 @@
 
 #include "lib.h"
 
-static void	chek_rev_dns(char *ip_addr, t_args *args)
+void	chek_rev_dns(char *ip_addr, t_args *args)
 {
 	struct sockaddr_in	temp_addr;
 	socklen_t			len;
@@ -47,7 +47,6 @@ int	process_host(t_args *args, struct sockaddr_in *addr_config)
 	(*addr_config).sin_family = host_entity->h_addrtype;
 	(*addr_config).sin_port = htons(0);
 	(*addr_config).sin_addr.s_addr = *(long *)host_entity->h_addr;
-	chek_rev_dns(args->ip, args);
 	args->sock = socket(AF_INET, SOCK_RAW, IPPROTO_ICMP);
 	return (EXIT_SUCCESS);
 }
