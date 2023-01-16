@@ -19,15 +19,12 @@ int	print_error(char *strError)
 
 void	print_stats(t_stats stats)
 {
-	bool	error;
-
-	error = false;
 	printf("\n--- %s ping statistics ---\n", stats.ip);
 	if (stats.pkt_transmited != 0 && stats.pkt_received != 0)
 	{
 		stats.pkt_lost = ((stats.pkt_transmited - stats.pkt_received)
 			/ stats.pkt_transmited) * 100;
-		error = true;
+		stats.error = true;
 	}
 	stats.time = (get_time() - stats.time_gstart);
 	printf("%d packets transmitted, %d received, ", stats.pkt_transmited,
@@ -41,9 +38,11 @@ void	print_stats(t_stats stats)
 			stats.time);
 		stats.avg /= stats.seq;
 		stats.mdev /= stats.seq;
-		if (error == true)
+		if (stats.error == true)
 			printf("rtt min/avg/max/mdev = %.3f/%.3f/%.3f/%.3f ms\n", stats.min,
 				stats.avg, stats.max, stats.mdev);
+		else
+			printf("\n");
 	}
 }
 

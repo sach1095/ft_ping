@@ -29,6 +29,7 @@ void	init_stats_and_time(t_stats *stats, t_args *args)
 	stats->pkt_transmited = 0;
 	stats->time_btw_packet = 0;
 	stats->ip = NULL;
+	stats->error = NULL;
 	stats->verbos = args->flags[V];
 	stats->ip = args->ip_brut;
 }

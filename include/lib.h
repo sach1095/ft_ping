@@ -81,6 +81,7 @@ typedef struct s_stats
 	double	time_btw_packet;
 	char	*ip;
 	bool	verbos;
+	bool	error;
 }t_stats;
 
 /*
