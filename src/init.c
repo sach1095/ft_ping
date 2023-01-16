@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 14:45:44 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/01/16 14:51:41 by sbaranes         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lib.h"
 
-void InitStatsAndTime(t_stats *stats, t_args *args)
+void	init_stats_and_time(t_stats *stats, t_args *args)
 {
 	stats->min = (float)INT32_MAX;
 	stats->avg = 0;

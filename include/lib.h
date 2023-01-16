@@ -1,4 +1,17 @@
-#pragma once
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lib.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sbaranes <sbaranes@student.42lyon.fr>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/16 14:45:24 by sbaranes          #+#    #+#             */
+/*   Updated: 2023/01/16 15:44:12 by sbaranes         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef LIB_H
+# define LIB_H
 
 # include <stdlib.h>
 # include <stdio.h>
@@ -25,6 +38,8 @@
 # define TTL_EXCCEDED 192
 # define ECHO_REPLY 0
 # define PING_SLEEP_RATE 1000000
+# define ERROR_FLAG "Flags format invalide, you can use -[t, v]only.\n"
+# define ERROR_ARG "Number of arguments incorrect.\n"
 
 /*
 ** Struct for main variables
@@ -73,10 +88,9 @@ typedef struct s_stats
 */
 typedef struct s_packet
 {
-	struct icmphdr hdr;
-	char msg[PKT_SIZE-sizeof(struct icmphdr)];
+	struct icmphdr	hdr;
+	char			msg[PKT_SIZE - sizeof(struct icmphdr)];
 }t_packet;
-
 
 /*******************************
 ** Methods in different files **
@@ -85,33 +99,35 @@ typedef struct s_packet
 /*
 ** utils.c
 */
-int		length(char *str);
-double	get_time(void);
-void	ft_bzero(void *s, size_t n);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-char	*ft_strcpy(char *dest, char *src);
-unsigned short CalcChecksum(void *packet, int len);
+int				length(char *str);
+double			get_time(void);
+void			ft_bzero(void *s, size_t n);
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+char			*ft_strcpy(char *dest, char *src);
 
 /*
-** sendPing.c
+** send_ping.c
 */
-int		SendPing(t_args *args, struct sockaddr_in *addr_config);
+int				send_ping(t_args *args, struct sockaddr_in *addr_config);
 
 /*
-** getHost.c
+** processHost.c
 */
-int ProcessHost(t_args *args, struct sockaddr_in *addr_config);
+int				process_host(t_args *args, struct sockaddr_in *addr_config);
+unsigned short	calc_checksum(void *packet, int len);
 
 /*
 ** printMethod.c
 */
-int		PrintError(char *strError);
-void	PrintStats(t_stats stats);
-void	PrintReceiveSuccess(t_args *args, t_stats *stats);
-void	PrintReceiveFail(t_args *args, t_stats *stats);
+int				print_error(char *strError);
+void			print_stats(t_stats stats);
+void			print_receive_success(t_args *args, t_stats *stats);
+void			print_receive_fail(t_args *args, t_stats *stats);
 
 /*
 ** init.c
 */
-void	InitStatsAndTime(t_stats *stats, t_args *args);
-void	init_args(t_args *args);
+void			init_stats_and_time(t_stats *stats, t_args *args);
+void			init_args(t_args *args);
+
+#endif
